@@ -1,0 +1,32 @@
+.env
+
+# Build artifacts
+bin/
+dist/
+build/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Coverage and test output
+*.out
+coverage.out
+coverage-
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+tmp/
+temp/
