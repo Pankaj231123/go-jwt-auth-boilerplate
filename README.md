@@ -1,33 +1,45 @@
 # go-jwt-auth-boilerplate
 
-A small Go API starter built with Gin and environment-based configuration. The project currently boots an HTTP server, loads settings from a `.env` file, and exposes a simple health check route.
+This is a Go API project built with Gin, PostgreSQL, JWT authentication, and simple rate limiting. I used it as a starter for a basic auth system with register, login, and protected routes.
 
-## What is implemented
+## What I built
 
-- Gin HTTP server bootstrap in `main.go`
-- Environment-based config loading in `config/config.go`
-- `GET /ping` health check endpoint
-- Project structure prepared for future auth, middleware, database, models, and JWT work
+- Loaded application settings from a `.env` file in `config/config.go`
+- Connected the app to PostgreSQL and auto-migrated the user table in `database/db.go`
+- Created a `User` model in `models/user.go`
+- Added register and login handlers in `handlers/auth.go`
+- Generated and validated JWT tokens in `utils/jwt.go`
+- Added JWT protection for the `/me` route in `middleware/auth.go`
+- Added in-memory rate limiting for auth routes in `middleware/ratelimit.go`
+- Added a simple health check route at `GET /ping`
+
+## Routes
+
+- `GET /ping` - health check
+- `POST /register` - create a new user and return a token
+- `POST /login` - log in and return a token
+- `GET /me` - protected route that returns the current token payload
 
 ## Project structure
 
-- `main.go` - application entry point
-- `config/` - loads environment variables
-- `database/` - database layer placeholder
-- `handlers/` - request handlers placeholder
-- `middleware/` - middleware placeholder
-- `models/` - data models placeholder
-- `utils/` - utility helpers placeholder
-- `test.http` - quick local request example
+- `main.go` - application entry point and route setup
+- `config/` - environment configuration
+- `database/` - database connection and migration
+- `handlers/` - request handlers
+- `middleware/` - auth and rate limit middleware
+- `models/` - database models
+- `utils/` - JWT helpers
+- `test.http` - sample requests for local testing
 
 ## Requirements
 
 - Go 1.25 or later
+- PostgreSQL
 - A `.env` file in the project root
 
 ## Environment variables
 
-The app currently reads these values from `.env`:
+The app reads these values from `.env`:
 
 - `PORT`
 - `DB_HOST`
@@ -45,24 +57,15 @@ go mod tidy
 go run main.go
 ```
 
-The server starts on the port defined in `PORT`.
+## Sample requests
 
-## Test the API
+`test.http` contains example requests for:
 
-Health check:
-
-```http
-GET http://localhost:8080/ping
-```
-
-Example response:
-
-```json
-{
-	"message": "pong"
-}
-```
+- `GET /ping`
+- `POST /register`
+- `POST /login`
+- `GET /me`
 
 ## Notes
 
-The repository already has folders and names ready for JWT authentication, database integration, rate limiting, and user management, but those features are not implemented yet.
+Rate limiting is currently in-memory, so it resets when the server restarts. The auth flow uses bearer tokens in the `Authorization` header.
