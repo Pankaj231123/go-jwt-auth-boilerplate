@@ -21,3 +21,6 @@ Content-Type: application/json
   "email": "pankaj@test.com",
   "password": "123456"
 }
+### Me (protected)
+GET http://localhost:8080/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InBhbmthakB0ZXN0LmNvbSIsImV4cCI6MTc3NzY1MjQ4MSwiaWF0IjoxNzc3NTY2MDgxfQ.s5hpeek5h-tVMwYx9EafJLeJDl3PoGducfz-RXr5xR0
