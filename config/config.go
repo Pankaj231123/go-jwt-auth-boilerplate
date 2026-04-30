@@ -40,3 +40,6 @@ func getEnv(key string, fallback string) string {
 	}
 	return value
 }
+func (c *Config) GetJWTSecret() string {
+	return c.JWTSecret
+}
